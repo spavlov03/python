@@ -74,11 +74,11 @@ print_hello_x_or_ten_times(4) #- function
 Bonus section
 """
 
-print(num3) #- NameError: name <num3> is not defined
-num3 = 72 
-fruit[0] = 'cranberry' #- TypeError: 'tuple' object does not support item assignment
-print(person['favorite_team']) #- KeyError: 'favorite_team'
-print(pizza_toppings[7]) #- IndexError: list index out of range
-  print(boolean) #- IndentationError: unexpected indent
-fruit.append('raspberry') #- AttributeError: 'tuple' object has no attribute 'append'
-fruit.pop(1) #- AttributeError: 'tuple' object has no attribute 'pop'
+#print(num3) #- NameError: name <num3> is not defined
+##num3 = 72 
+#fruit[0] = 'cranberry' #- TypeError: 'tuple' object does not support item assignment
+#print(person['favorite_team']) #- KeyError: 'favorite_team'
+#print(pizza_toppings[7]) #- IndexError: list index out of range
+#  print(boolean) #- IndentationError: unexpected indent
+#fruit.append('raspberry') #- AttributeError: 'tuple' object has no attribute 'append'
+#fruit.pop(1) #- AttributeError: 'tuple' object has no attribute 'pop'
