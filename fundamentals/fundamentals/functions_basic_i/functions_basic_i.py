@@ -2,46 +2,46 @@
 def number_of_food_groups():
     return 5
 print(number_of_food_groups())
-
+# Output should be : 5
 
 #2
 def number_of_military_branches():
     return 5
 print(number_of_days_in_a_week_silicon_or_triangle_sides() + number_of_military_branches())
-
+# Output should be :Error number_of_days_in_a_week_silicon_or_triangle_sides() not defined
 
 #3
 def number_of_books_on_hold():
     return 5
     return 10
 print(number_of_books_on_hold())
-
+# Output should be : 5
 
 #4
 def number_of_fingers():
     return 5
     print(10)
 print(number_of_fingers())
-
+# Output should be : 5
 
 #5
 def number_of_great_lakes():
     print(5)
 x = number_of_great_lakes()
 print(x)
-
+# Output should be : 5, none
 
 #6
 def add(b,c):
     print(b+c)
 print(add(1,2) + add(2,3))
-
+# Output should be : 3,5 , error
 
 #7
 def concatenate(b,c):
     return str(b)+str(c)
 print(concatenate(2,5))
-
+# Output should be :  25
 
 #8
 def number_of_oceans_or_fingers_or_continents():
@@ -53,7 +53,7 @@ def number_of_oceans_or_fingers_or_continents():
         return 10
     return 7
 print(number_of_oceans_or_fingers_or_continents())
-
+# Output should be : 100, 10
 
 #9
 def number_of_days_in_a_week_silicon_or_triangle_sides(b,c):
@@ -65,14 +65,14 @@ def number_of_days_in_a_week_silicon_or_triangle_sides(b,c):
 print(number_of_days_in_a_week_silicon_or_triangle_sides(2,3))
 print(number_of_days_in_a_week_silicon_or_triangle_sides(5,3))
 print(number_of_days_in_a_week_silicon_or_triangle_sides(2,3) + number_of_days_in_a_week_silicon_or_triangle_sides(5,3))
-
+# Output should be : 7,14,21
 
 #10
 def addition(b,c):
     return b+c
     return 10
 print(addition(3,5))
-
+# Output should be : 8
 
 #11
 b = 500
@@ -83,7 +83,7 @@ def foobar():
 print(b)
 foobar()
 print(b)
-
+# Output should be : 500,500,300,500
 
 #12
 b = 500
@@ -95,7 +95,7 @@ def foobar():
 print(b)
 foobar()
 print(b)
-
+# Output should be : 500,500,300,500
 
 #13
 b = 500
@@ -107,7 +107,7 @@ def foobar():
 print(b)
 b=foobar()
 print(b)
-
+# Output should be :500,500,300,300
 
 #14
 def foo():
@@ -117,7 +117,7 @@ def foo():
 def bar():
     print(3)
 foo()
-
+# Output should be : 1,3,2
 
 #15
 def foo():
@@ -130,3 +130,4 @@ def bar():
     return 5
 y = foo()
 print(y)
+# Output should be :1,3,5,10
