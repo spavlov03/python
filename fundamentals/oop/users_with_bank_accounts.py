@@ -1,15 +1,51 @@
+class User:
+    def __init__(self, name="Unassigned"):
+        self.name = name
+        self.accounts = {}
+    def open_new_account(self, with_amount=0,interest=0.04,account_type="checking"):
+        print("Creating new account...")
+        self.accounts[account_type] = BankAccount(with_amount,interest,account_type)
+        return self
+    def make_withdrawal(self,amount, account_type="checking"):
+        self.accounts[account_type].withdraw(amount)
+        return self
+    def display_user_balance(self): 
+        print(self.name)
+        for account_name in self.accounts:
+            self.accounts[account_name].display_account_info()
+        return self
+    def transfer_money(self,other_user,other_user_acc_type,amount,from_account_type):
+        if self.accounts[from_account_type].balance < amount:
+            print("Insuficient funds")
+            return self
+        print(f"Transferring $ {amount} into {other_user.name}'s {other_user_acc_type} account,")
+        self.accounts[from_account_type].balance -= amount
+        other_user.accounts[other_user_acc_type].balance += amount
+
+        self.display_user_balance()
+        other_user.display_user_balance()
+
+        return self
+    def make_deposit(self,amount, account_type="checking"): 
+        self.accounts[account_type].deposit(amount)
+        return self
+    def yielf_interest(self):
+        self.account.yield_interest()
+        return self
+
 class BankAccount:
-    bank_balance = 0
-    accounts = []
-    def __init__(self, int_rate, balance): 
-        self.int_rate = int_rate
+    bank_name = "First National Dojo"
+    all_accounts = []
+    def __init__(self, balance=0, interest=0.01, account_type="checking"): 
         self.balance = balance 
-        BankAccount.bank_balance += balance
-        BankAccount.accounts.append(self)
+        self.interest = interest
+        self.account_type = account_type
+        BankAccount.all_accounts.append(self)
     def deposit(self, amount):
+        print(f"Depositing $ {amount}")
         self.balance = self.balance + amount
         return self
-    def withdrawal(self, amount):
+    def withdraw(self, amount):
         if self.balance >= amount: 
             self.balance = self.balance-amount
         else: 
@@ -17,65 +53,29 @@ class BankAccount:
             self.balance -= 5
         return self
     def display_account_info(self):
-        print(f"Balance: {self.balance}")
+        print(f"Account : {self.account_type}")
+        print(f"Account Balance: ${self.balance}")
+        print(f"Interest Rate: {self.interest}")
         return self
     def yield_interest(self):
         if self.balance > 0: 
+            print("Yielfind interest...")
             self.balance = (self.balance*self.int_rate) + self.balance
         return self
     @classmethod
     def print_all_accounts(cls):
-        for account in cls.accounts: 
+        for account in cls.all_accounts: 
             account.display_account_info()
+        return cls
+svet = User("Svet Pavlov")
+svet.open_new_account(0,0.05)
+svet.make_deposit(100)
+svet.open_new_account(500,0.06,"savings")
 
-class User:
-    def __init__(self, first_name,last_name,email,age):
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.age = age
-        self.is_reward_member = False
-        self.gold_card_points = 0
-        self.checking_account = BankAccount(int_rate=0.01,balance=0)
-        self.savings_account = BankAccount(int_rate=0.02,balance=0)
-    def display_info(self):
-        print("First Name is: ",self.first_name)
-        print("Last Name is: ",self.last_name)
-        print("Email is: ",self.email)
-        print("Age is: ",self.age)
-        return self
-    def enroll(self): 
-        if self.is_reward_member == False:
-            self.is_reward_member = True
-        else: 
-            print(f"{self.first_name} already a member.")
-        self.gold_card_points = 200
-        return self
-    def spend_points(self,amount):
-        if self.gold_card_points > amount:
-            self.gold_card_points = self.gold_card_points - amount
-        else: 
-            print("Not Enough Points")
-            #print("Your current points are :", self.gold_card_points , "you need", amount)
-            print(f"Your current points are {self.gold_card_points} and you need {amount}")
-        return self
-    def make_deposit(self,amount): 
-        self.checking_account.deposit(amount)
-    def make_withdrawal(self,amount):
-        self.checking_account.withdrawal(amount)
-    def display_user_balance(self): 
-        print(f"Your {self.checking_account}")
-        self.checking_account.display_account_info
-    #def transfer_money(self,amount):
-    #    self.checking_account.withdrawal(amount)
-        #other_user.checking_account +=amount
+mitko = User("Mitko Dimi")
+mitko.open_new_account(300,0.045)
+svet.display_user_balance()
+mitko.display_user_balance()
 
-svet_user = User("Svet","Pavlov","svet@svet.com",34)
-svet_user.savings_account.deposit(18).yield_interest()
-svet_user.checking_account.deposit(19).withdrawal(2)
-pavel_user = User("Pavel","Skenderov","pavel@email.com",36)
-pavel_user.savings_account.deposit(500).yield_interest()
-pavel_user.checking_account.deposit(109).withdrawal(2)
-BankAccount.print_all_accounts()
-
+mitko.transfer_money(svet,"checking",100,"checking").make_withdrawal(150)
 
