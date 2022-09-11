@@ -21,7 +21,6 @@ class User:
         print(f"Transferring $ {amount} into {other_user.name}'s {other_user_acc_type} account,")
         self.accounts[from_account_type].balance -= amount
         other_user.accounts[other_user_acc_type].balance += amount
-
         self.display_user_balance()
         other_user.display_user_balance()
 
@@ -31,7 +30,7 @@ class User:
         return self
     def yielf_interest(self):
         self.account.yield_interest()
-        return self
+        return self 
 
 class BankAccount:
     bank_name = "First National Dojo"
@@ -74,8 +73,8 @@ svet.open_new_account(500,0.06,"savings")
 
 mitko = User("Mitko Dimi")
 mitko.open_new_account(300,0.045)
-svet.display_user_balance()
-mitko.display_user_balance()
+#svet.display_user_balance()
+#mitko.display_user_balance()
 
 mitko.transfer_money(svet,"checking",100,"checking").make_withdrawal(150)
 
