@@ -5,12 +5,12 @@ class Ninja:
         self.pet = Pet(pet,"Dog","jump")
         self.treats = treats
         self.pet_food = pet_food
-    def walk(self,pet): 
-        Pet.play()
+    def walk(self): 
+        self.pet.play()
     def feed(self):
-        Pet.eat()
-    def bathe(self,pet):
-        Pet.noise()
+        self.pet.eat()
+    def bathe(self):
+        self.pet.noise()
 
 class Pet: 
     def __init__(self,name,type,tricks):
@@ -27,8 +27,16 @@ class Pet:
     def play(self):
         self.health +=5
     def noise(self):
-        print(f"{name} sound")
+        print(f"{self.name} sound")
 
 svet = Ninja("Svet","Pavlov","Gabi","bones","soup")
+print(f"Health before walk is : {svet.pet.health}")
+svet.walk()
+print(f"Health after walk is : {svet.pet.health}")
+print(f"Energy & Health before feed are : {svet.pet.energy} & {svet.pet.health}")
 svet.feed()
+print(f"Energy & Health after feed are : {svet.pet.energy} & {svet.pet.health}")
+print(f"Before bathe")
+svet.bathe()
+print(f"After bathe")
 
