@@ -59,7 +59,9 @@ class Player:
         self.age = player["age"]
         self.position = player["position"]
         self.team = player["team"]
-    
+    def __repr__(self):
+        return (f" Name: {self.name} Age: {self.age} Position: {self.position} Team: {self.team} \n")
+        
 
 
 # Create your Player instances here!
