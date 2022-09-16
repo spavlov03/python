@@ -1,0 +1,21 @@
+USE dojosninjas
+INSERT INTO dojos (name) VALUES ("Python")
+INSERT INTO dojos (name) VALUES ("MERN")
+INSERT INTO dojos (name) VALUES ("JAVA")
+SET SQL_SAFE_UPDATES = 0;
+DELETE FROM dojos
+INSERT INTO dojos (name) VALUES ("Python")
+INSERT INTO dojos (name) VALUES ("MERN")
+INSERT INTO dojos (name) VALUES ("JAVA")
+INSERT INTO ninjas (first_name,last_name,age,dojo_id) VALUES ("Svet","Pavlov","34","4")
+INSERT INTO ninjas (first_name,last_name,age,dojo_id) VALUES ("Pavel","Skende","36","4")
+INSERT INTO ninjas (first_name,last_name,age,dojo_id) VALUES ("PythonMan","Stacker","31","4")
+INSERT INTO ninjas (first_name,last_name,age,dojo_id) VALUES ("MerMan","StackMern","30","5")
+INSERT INTO ninjas (first_name,last_name,age,dojo_id) VALUES ("MerMan2","StackMern2","31","5")
+INSERT INTO ninjas (first_name,last_name,age,dojo_id) VALUES ("MerMan3","StackMern3","32","5")
+INSERT INTO ninjas (first_name,last_name,age,dojo_id) VALUES ("JavaMan1","StackMern1","32","6")
+INSERT INTO ninjas (first_name,last_name,age,dojo_id) VALUES ("JavaMan2","StackJava2","32","6")
+INSERT INTO ninjas (first_name,last_name,age,dojo_id) VALUES ("JavaMan3","StackJava3","32","6")
+SELECT * FROM ninjas WHERE dojo_id = 4
+SELECT * FROM ninjas WHERE dojo_id = 6
+SELECT name AS "DOJO NAME" FROM dojos JOIN ninjas on dojos.id = ninjas.dojo_id WHERE ninjas.id = 9
