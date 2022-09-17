@@ -1,0 +1,24 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+}
+.container { 
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    
+}
+
+.box-container {
+    display: flex;
+    gap: 20px;
+    
+}
+
+.box { 
+    height: 200px;
+    width: 200px;
+    border: 2px solid;
+    border-color: black;
+    background-color: #9EC5F8;
+}
