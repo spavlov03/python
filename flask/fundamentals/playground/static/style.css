@@ -5,20 +5,21 @@
 .container { 
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
-    
+    padding: 30px;    
+    gap: 30px;
 }
 
 .box-container {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
     
 }
 
 .box { 
     height: 200px;
     width: 200px;
-    border: 2px solid;
+    border: 3px solid;
     border-color: black;
     background-color: #9EC5F8;
 }
