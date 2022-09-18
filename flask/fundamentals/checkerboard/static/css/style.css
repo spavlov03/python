@@ -1,0 +1,16 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+table {
+    border: 0px;
+    border-collapse: collapse;
+}
+.square-1 {
+    width: 64px;
+    height: 64px;
+}
+.square-2 {
+    width: 64px;
+    height: 64px;
+}
