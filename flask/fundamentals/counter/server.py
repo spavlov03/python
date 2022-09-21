@@ -13,8 +13,8 @@ def count():
 @app.route('/2')         
 def count2():
     if 'count' in session:
-        session['count'] = session.get('count') + 2
-    return render_template('index.html', count=session['count'])
+        session['count'] = session.get('count') + 1
+    return redirect('/')
 
 @app.route('/destroy_session')         
 def destroy():
