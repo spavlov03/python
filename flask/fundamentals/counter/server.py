@@ -18,7 +18,7 @@ def count2():
 
 @app.route('/destroy_session')         
 def destroy():
-    session.pop('count',None)
+    session.clear()
     return redirect('/')
 
 if __name__=="__main__":   
