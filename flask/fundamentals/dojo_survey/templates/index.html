@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojo Survey</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <!-- <link rel="stylesheet" href="/flask/fundamentals/dojo_survey/static/css/style.css"> -->
+</head>
+<body>
+    <div class="formbox container d-flex flex-column p-5 border border-dark border-3">
+        <h1 class="text-warning">Dojo Survey</h1>
+        <form action="/process" method="post" class="d-flex flex-column">
+            <label for="name">Name:</label>
+            <input type="text" name="name">
+            <label for="location">Dojo Location:</label>
+            <div class="=d-flex">
+                <input type="radio" name="location" value="san_jose">
+                <label for="san_Jose">San Jose</label>
+                <input type="radio" name="location" value="chicago">
+                <label for="chicago">Chicago</label>
+                <input type="radio" name="location" value="online">
+                <label for="online">Online</label>
+                <input type="radio" name="location" value="bulgaria">
+                <label for="bulgaria">Bulgaria</label>
+                <!-- <select name="location" id="location">
+                    <option value="san_jose">San Jose</option>
+                    <option value="chicago">Chicago</option>
+                    <option value="online">Online</option>
+                    <option value="bulgaria">Bulgaria</option>
+                </select> -->
+            </div>
+            <label for="favlang">Favorite Language:</label>
+            <select name="favlang" id="favlang">
+                <option value="python">Python</option>
+                <option value="javascript">JavaScript</option>
+                <option value="java">Java</option>
+                <option value="swift">Swift</option>
+            </select>
+            <!-- <div class="d-flex">
+                <input type="checkbox" name="favlang" value="python">
+                <label for="favlang">Python</label>
+                <input type="checkbox" name="favlang" value="javascript">
+                <label for="favlang">JavaScript</label>
+                <input type="checkbox" name="favlang" value="java">
+                <label for="favlang">Java</label>
+                <input type="checkbox" name="favlang" value="swift">
+                <label for="favlang">Swift</label>
+            </div> -->
+
+            <label for="comment">Comment (optional):</label>
+            <textarea name="comment" id="comment" cols="30" rows="10"></textarea>
+            <input type="submit" value="Submit" class="btn btn-outline-warning w-50 mt-3">
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+</body>
+</html>
