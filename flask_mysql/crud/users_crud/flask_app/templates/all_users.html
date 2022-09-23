@@ -15,19 +15,25 @@
     <div class="container bg-dark mh-100">
         <h1 class="text-light">All Users</h1>
         <table class="table table-dark table-striped">
-            <tr>
-                <th>ID</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Created At</th>
-            </tr>
+            <th>
+                <td>ID</td>
+                <td>Full Name</td>
+                <td>Email</td>
+                <td>Created At</td>
+            </th>
             {% for user in users: %}
-            <tr>
-                <td>{{user.id}}</td>
-                <td>{{user.first_name + " " + user.last_name}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.created_at}}</td>
-            </tr>
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.created_at}}</td>
+                    <td>
+                        <a href="">Show</a> |
+                        <a href="/users/{{user.id}}/edit">Edit</a> |
+                        <a href="/users/{{user.id}}/delete">Delete</a>
+                    </td>
+                </tr>
             {% endfor %}
         </table>
         <a href="/new-user" class="text-warning">Add a New User</a>
