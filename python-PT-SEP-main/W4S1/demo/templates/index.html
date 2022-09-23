@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>The Products place</h1>
+    <form action="/add-product" method="post">
+      <label for="">Name</label>
+      <input type="text" name="name" />
+      <label for="">Price</label>
+      <input type="number" name="price" />
+      <label for="">Category</label>
+      <select name="catgory" id="">
+        <option value="">--------</option>
+        <option value="phones">Phones</option>
+        <option value="tablets">Tablets</option>
+        <option value="watchs">Whatcs</option>
+        <option value="laptops">Laptops</option>
+      </select>
+      <input type="submit" value="Add Product" />
+    </form>
+    <h2>Products</h2>
+    <ul>
+      {% for product in session.products %}
+      <li>Name: {{product.name}},Price: {{product.price}},Category: {{product.name}}</li>
+      {% endfor%}
+    </ul>
+    <a href="/clear-session">Clear session</a>
+  </body>
+</html>
