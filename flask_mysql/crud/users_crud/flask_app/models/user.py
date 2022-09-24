@@ -34,6 +34,13 @@ class User:
         data = {"id":id}
         query = "DELETE FROM users WHERE id=%(id)s"
         result = connectToMySQL(cls.DB).query_db(query,data)
-        print("__ DELETE PRODUCT___",result)
+        print("___ DELETE USER___",result)
+        return result
+
+    @classmethod
+    def edit_user(cls, data):
+        query = "UPDATE users SET first_name=%(new_first_name)s, last_name=%(new_last_name)s, email=%(new_email)s WHERE id=%(id)s"
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        print("___ UPDATE USER___",result)
         return result
 
