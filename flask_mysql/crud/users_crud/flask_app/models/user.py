@@ -21,6 +21,14 @@ class User:
         for row in results:
             users.append(cls(row))
         return users
+    @classmethod
+    def get_user_by_id(cls,id):
+        data = {"id":id}
+        query = "SELECT * FROM users WHERE id=%(id)s"
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        print("__SHOWING USER__",result)
+        return result
+
 
     @classmethod
     def add_user(cls, form_data):

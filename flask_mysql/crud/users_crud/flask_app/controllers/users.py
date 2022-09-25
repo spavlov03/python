@@ -24,4 +24,7 @@ def add_user():
 def delete_user(id):
     user.User.delete_user(id)
     return redirect("/")
-
+@app.route("/users/<id>/show")
+def show_one(id):
+    one_user = user.User.get_user_by_id(id)
+    return render_template("show_user.html", one_user = one_user)
