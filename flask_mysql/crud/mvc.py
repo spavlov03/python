@@ -34,11 +34,4 @@ Controller
     Minimal logic
     Calls on models to aggregate/process data
     Determines appropriate response
-
-
-
-
-
-
-
 """
