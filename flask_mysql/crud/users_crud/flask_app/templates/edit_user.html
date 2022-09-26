@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Add a New User</title>
+        <title>Edit {{one_user[0]['first_name']}}</title>
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -12,28 +12,30 @@
             crossorigin="anonymous">
     </head>
     <body>
-        <div class="container bg-dark">
+        <div class="container bg-dark p-5">
             <div class="d-flex justify-content-sm-around pt-5">
                 <h2 class="text-light">Edit User</h2>
                 <a href="/" class="text-warning">Home</a>
             </div>
             <div class="d-flex justify-content-sm-around">
                 {# FORM START #}
-                <form action="/add-user" method="post">
+                <form action="/users/{{one_user[0].id}}/edit-user" method="post">
                     <div class="form-group">
                         <label for="first_name" class="text-light">First Name</label>
-                        <input type="text" class="form-control" id="first_name" aria-describedby="first_name" placeholder="Enter first name" name="first_name"/>
+                        <input type="text" class="form-control" id="first_name" aria-describedby="first_name" placeholder="{{one_user[0].first_name}}" name="first_name"/>
                     </div>
                     <div class="form-group">
                         <label for="last_name" class="text-light">Last Name</label>
-                        <input type="text" class="form-control" id="last_name" aria-describedby="last_name" placeholder="Enter last name" name="last_name"/>
+                        <input type="text" class="form-control" id="last_name" aria-describedby="last_name" placeholder="{{one_user[0].last_name}}" name="last_name"/>
                     </div>
                     <div class="form-group">
                         <label for="email" class="text-light">Email</label>
-                        <input type="text" class="form-control" id="email" aria-describedby="email" placeholder="Enter email" name="email"/>
+                        <input type="text" class="form-control" id="email" aria-describedby="email" placeholder="{{one_user[0].email}}" name="email"/>
+                        <input type="hidden" name="id" value="{{one_user[0].id}}">
                     </div>
                     
-                    <button type="submit" class="btn btn-outline-warning mt-2 mb-2">Create</button>
+                    <button type="submit" class="btn btn-outline-warning mt-2 mb-2">Update</button> 
+                    <a href="/users/{{one_user[0].id}}/show" class="btn btn-outline-warning">Show</a> |
                 </form>
                 {# FORM END #}
             </div>

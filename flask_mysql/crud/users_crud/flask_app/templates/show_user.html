@@ -12,7 +12,7 @@
             crossorigin="anonymous">
     </head>
     <body>
-        <div class="container bg-dark text-light">
+        <div class="container bg-dark text-light p-5">
             <div class="d-flex justify-content-sm-around pt-5">
                 <h2 class="text-light">User {{one_user[0]['first_name']}}</h2>
                 <a href="/" class="text-warning">Home</a>
@@ -21,8 +21,8 @@
             <p>Email: {{one_user[0]['email']}}</p>
             <p>Created On: {{one_user[0]['created_at']}}</p>
             <p>Last Updated On: {{one_user[0]['updated_at']}}</p>
-            <a href="">Edit</a>
-            <a href="/users/{{id}}/delete">Delete</a>
+            <a href="/users/{{one_user[0].id}}/edit" class="btn btn-outline-warning">Edit</a>
+            <a href="/users/{{one_user[0].id}}/delete" class="btn btn-outline-warning">Delete</a>
         </div>
     </body>
 </html>
