@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container d-flex">
+        <div class="left m-3">
+            <h2>New Dojo</h2>
+            <form action="/new-dojo" class="d-flex" method="POST">
+                <label for="dojo_name">Name:</label>
+                <div class="d-flex flex-column gap-2 m-1">
+                    <input type="text" name="dojo_name">
+                    <input type="submit" value="Create" class="w-50 btn btn-outline-success">
+                </div>
+            </form>
+        </div>
+        <div class="right m-3">
+            <h2>All Dojos</h2>
+            <div class="border border-dark">
+                <p>Entry1</p>
+                <p>Entry2</p>
+                <p>Entry3</p>
+                <p>Entry4</p>
+                <p>Entry5</p>
+            </div>
+            <a href="">Add Ninja</a>
+        </div>
+    </div>
+</body>
+</html>

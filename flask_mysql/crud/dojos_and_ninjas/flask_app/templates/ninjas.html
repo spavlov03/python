@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Ninja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h2>New Ninja</h2>
+            <form action="/new-ninja" class="d-flex flex-column gap-2">
+                <div>
+                    <label for="dojos">Dojo:</label>
+                    <select name="dojos" id="">
+                        {% for dojo in dojos: %}
+                        {% pass %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="d-flex">
+                    <label for="first_name">First Name</label>
+                    <input type="text" name="first_name">
+                </div>
+                <div class="d-flex">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" name="last_name">
+                </div>
+                <div class="d-flxe">
+                    <label for="age">Age</label>
+                    <input type="text" name="age">
+                </div>
+                <input type="submit" value="Create" class="btn btn-outline-success">
+            </form>
+    </div>
+</body>
+</html>
