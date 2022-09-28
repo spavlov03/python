@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Edit Ninja
+    
+    <form action="/ninja/edit/{{one_ninja[0]['id']}}" class="d-flex flex-column gap-2" method="POST">
+        <div class="d-flex">
+            <label for="first_name">First Name</label>
+            <input type="text" name="first_name" value="{{one_ninja[0]['first_name']}}">
+        </div>
+        <div class="d-flex">
+            <label for="last_name">Last Name</label>
+            <input type="text" name="last_name" value="{{one_ninja[0]['last_name']}}">
+        </div>
+        <div class="d-flex">
+            <label for="age">Age</label>
+            <input type="number" name="age" value="{{one_ninja[0]['age']}}">
+        </div>
+        <input type="submit" value="Create" class="btn btn-outline-success">
+    </form>
+</body>
+</html>

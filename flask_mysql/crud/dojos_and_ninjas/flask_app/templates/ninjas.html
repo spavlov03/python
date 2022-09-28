@@ -10,12 +10,12 @@
 <body>
     <div class="container">
         <h2>New Ninja</h2>
-            <form action="/new-ninja" class="d-flex flex-column gap-2">
+            <form action="/create/ninja" class="d-flex flex-column gap-2" method="POST">
                 <div>
-                    <label for="dojos">Dojo:</label>
-                    <select name="dojos" id="">
+                    <label for="dojo">Dojo:</label>
+                    <select name="dojo_id" id="">
                         {% for dojo in dojos: %}
-                        {% pass %}
+                        <option value="{{dojo['id']}}" name="dojo_id">{{dojo['name']}}</option>
                         {% endfor %}
                     </select>
                 </div>
@@ -27,9 +27,9 @@
                     <label for="last_name">Last Name</label>
                     <input type="text" name="last_name">
                 </div>
-                <div class="d-flxe">
+                <div class="d-flex">
                     <label for="age">Age</label>
-                    <input type="text" name="age">
+                    <input type="number" name="age">
                 </div>
                 <input type="submit" value="Create" class="btn btn-outline-success">
             </form>

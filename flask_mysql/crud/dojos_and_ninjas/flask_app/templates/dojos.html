@@ -11,7 +11,7 @@
     <div class="container d-flex">
         <div class="left m-3">
             <h2>New Dojo</h2>
-            <form action="/new-dojo" class="d-flex" method="POST">
+            <form action="/create/dojo" class="d-flex" method="POST">
                 <label for="dojo_name">Name:</label>
                 <div class="d-flex flex-column gap-2 m-1">
                     <input type="text" name="dojo_name">
@@ -22,13 +22,13 @@
         <div class="right m-3">
             <h2>All Dojos</h2>
             <div class="border border-dark">
-                <p>Entry1</p>
-                <p>Entry2</p>
-                <p>Entry3</p>
-                <p>Entry4</p>
-                <p>Entry5</p>
+                {% for dojo in dojos: %}
+                <p>
+                    <a href="/dojo/{{dojo.id}}">{{dojo.name}}</a>
+                </p>
+                {% endfor %}
             </div>
-            <a href="">Add Ninja</a>
+            <a href="/ninjas">Add Ninja</a>
         </div>
     </div>
 </body>
