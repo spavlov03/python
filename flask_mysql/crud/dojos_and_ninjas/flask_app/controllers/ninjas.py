@@ -11,7 +11,8 @@ def ninja_index():
 def add_ninja():
     #print("DATA IS .........",request.form)
     ninja.Ninja.new_ninja(request.form)
-    return redirect("/")
+    dojo_id = request.form['dojo_id']
+    return redirect(f"/dojo/{dojo_id}")
 
 @app.route("/ninjas/delete/<id>")
 def delete_ninja(id):
@@ -29,4 +30,3 @@ def ninja_edit(id):
     ninja.Ninja.edit_ninja(request.form)
     dojo_id = int(session['dojo-id'])
     return redirect(f"/dojo/{dojo_id}")
-
