@@ -23,7 +23,7 @@
             <h2>All Books</h2>
             <div class="d-flex flex-column m-2">
                 {% for book in books %}
-                <a href="">{{book['title']}}</a>
+                <a href="/books/{{book['id']}}">{{book['title']}}</a>
                 {% endfor %}
             </div>
             <a href="/">Home</a>
