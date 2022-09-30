@@ -1,0 +1,7 @@
+.my-container {
+    background-color: #6E6173;
+    height:100vh;
+}
+.inner-container { 
+    gap: 200px;
+}
