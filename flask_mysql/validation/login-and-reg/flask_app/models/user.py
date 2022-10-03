@@ -1,12 +1,16 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
-from flask_bcrypt import Bcrypt
-from flask_app import app
 import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$') 
+PASS_REGEX = re.compile(r"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$")
 
-bcrypt = Bcrypt(app)
+#Minimum 8 characters - {8,}
+#At least one uppercase - (?=.*?[A-Z])
+#At least one lowercase - (?=.*?[a-z])
+#At least one digit - (?=.*?[0-9])
+#At least one special character - (?=.*?[#?!@$%^&*-])
+
 class User:
     DB = "login_reg"
 
@@ -21,50 +25,58 @@ class User:
 
     @classmethod
     def register(cls,user_data):
-        data = {
-            "first_name":user_data['first_name'],
-            "last_name":user_data['last_name'],
-            "email":user_data['email'],
-            "password":bcrypt.generate_password_hash(user_data['password'])
-        }
         query = "INSERT INTO users (first_name,last_name,email,password) VALUES (%(first_name)s,%(last_name)s,%(email)s,%(password)s);"
-        result = connectToMySQL(cls.DB).query_db(query,data)
+        result = connectToMySQL(cls.DB).query_db(query,user_data)
         print("___ADDING NEW USER___",result)
         return result
 
     @classmethod
     def get_user_info(cls,data):
         #print("DATA IS --- ",data)
-        query = "SELECT * FROM users WHERE id= %(id)s;"
-        result = connectToMySQL(cls.DB).query_db(query,data)
+        query = "SELECT * FROM users;"
+        results = connectToMySQL(cls.DB).query_db(query,data)
+        users = []
+        for row in results:
+            users.append(cls(row))
         #print("__SELECTING USER__",result)
-        return result[0]
+        return users
     @classmethod
     def get_user_info_by_email(cls,data):
         #print("DATA IS --- ",data)
         query = "SELECT * FROM users WHERE email= %(email)s;"
         result = connectToMySQL(cls.DB).query_db(query,data)
+        if len(result) < 1:
+            return False
         #print("__SELECTING USER__",result)
-        return result[0]
+        return cls(result[0])
     @classmethod
-    def check_user_email(cls,data):
-        query = "SELECT email FROM users WHERE email = %(email)s;"
+    def get_user_by_id(cls,data):
+        query = "SELECT * FROM users WHERE id = %(id)s;"
         result = connectToMySQL(cls.DB).query_db(query,data)
-        return result[0] 
+        return cls(result[0])
 
     @staticmethod
     def validate_user(user):
         is_valid = True
-        if len(user['first_name']) < 2:
-            flash("First name must be at least 2 characters.")
-        if len(user['last_name']) < 2:
-            flash("Last name must be at least 2 characters.")
-        if len(user['email']) < 2:
-            flash("Email must be at least 2 characters.")
+        query = "SELECT * FROM users WHERE email = %(email)s;"
+        result = connectToMySQL(User.DB).query_db(query,user)
+        if len(result) >= 1:
+            flash("Email already taken.","register")
+            is_valid = False
         if not EMAIL_REGEX.match(user['email']):
             flash("Invalid email address!")
             is_valid = False
-        if len(user['password']) < 2:
-            flash("Password must be at least 8 characters")
+        if len(user['first_name']) < 2:
+            flash("First name must be at least 2 characters.")
+            is_valid = False
+        if len(user['last_name']) < 2:
+            flash("Last name must be at least 2 characters.")
+            is_valid = False
+        if not PASS_REGEX.match(user['password']):
+        #if len(user['password']) < 8:
+            flash("Password must be at least 8 characters and include One Uppercase, One lowercase and a number")
+            is_valid = False
+        if user['password'] != user['password_confirm']:
+            flash("Passwords don't match","register")
             is_valid = False
         return is_valid
