@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request,session,flash
 from flask_app import app
-from flask_app.models import user
+from flask_app.models import user,post
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -39,7 +39,7 @@ def dashboard():
     if "user_id" not in session:
         return redirect("/logout")
     data = {"id": session['user_id']}
-    return render_template('wall.html',user = user.User.get_user_by_id(data))
+    return render_template('wall.html',user = user.User.get_user_by_id(data),all_posts=post.Post.get_all_posts_with_creator())
 @app.route('/logout')
 def logout():
     session.clear()
