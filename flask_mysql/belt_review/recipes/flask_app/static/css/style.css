@@ -1,0 +1,19 @@
+body {
+    background-color: #56376b ;
+}
+h1 {
+    color: rgb(136, 184, 151);
+}
+.left, .right {
+    width: 400px;
+}
+.left-1, .right-1 {
+    width: 300px;
+}
+.submit-btn { 
+    width: 150px;
+    align-self: flex-end;
+}
+.new_btn {
+    width: 150px;
+}

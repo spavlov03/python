@@ -23,6 +23,8 @@ def new_recipe():
 def add_recipe():
     if "user_id" not in session:
         return redirect("/logout")
+    if not recipe.Recipe.validate_recipe(request.form):
+        return redirect("/recipes/new")
     data = {
         "name": request.form['name'],
         "description": request.form['description'],
@@ -37,5 +39,36 @@ def add_recipe():
 def show_recipe(id):
     if "user_id" not in session:
         return redirect("/logout")
-    one_recipe = recipe.Recipe.get_recipe_by_id(id)
+    data = {"id":id}
+    one_recipe = recipe.Recipe.get_one_recipe_by_id(data)
     return render_template("show_recipe.html",one_recipe = one_recipe,user_first_name=session['first_name'])
+@app.route("/recipes/edit/<int:id>")
+def edit_recipe(id):
+    if "user_id" not in session:
+        return redirect("/logout")
+    one_recipe = recipe.Recipe.get_recipe_by_id(id)
+    return render_template("edit_recipe.html",one_recipe=one_recipe)
+@app.route('/recipe_edit/<int:id>',methods=['POST'])
+def recipe_edit(id):
+    if "user_id" not in session:
+        return redirect("/logout")
+    data = {
+        "id":id,
+        "name":request.form['name'],
+        "description":request.form['description'],
+        "instructions":request.form['instructions'],
+        "date_made":request.form['date_made'],
+        "under_30_min":request.form['under_30_min']
+    }
+    recipe.Recipe.edit_recipe(data)
+    return redirect('/recipes')
+@app.route('/recipes/delete/<int:id>')
+def recipe_delete(id):
+    if "user_id" not in session:
+        return redirect("/logout")
+    one_recipe = recipe.Recipe.get_recipe_by_id(id)
+    if one_recipe['user_id'] == session['user_id']:
+        data = {"id":id}
+        recipe.Recipe.delete_recipe(data)
+        return redirect("/recipes")
+    return redirect("/recipes")

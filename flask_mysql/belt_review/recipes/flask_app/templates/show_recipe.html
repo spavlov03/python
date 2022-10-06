@@ -6,40 +6,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
 </head>
 <body>
     <div class="container">
         <header class="d-flex justify-content-between">
-            <h2>Welcome, {{user_first_name}}</h2>
-            <div>
-                <a href="/recipes">back to recipes</a>
-                <a href="/logout" class="">Logout</a>
+            <h2 class="text-warning">Welcome, {{user_first_name}}</h2>
+            <div class="mt-2">
+                <a href="/recipes" class="btn btn-outline-success me-1">back to recipes</a>
+                <a href="/logout" class="btn btn-outline-danger">Logout</a>
             </div>
         </header>
         <main>
-            <h2>{{one_recipe.name}}</h2>
-            <table class="border border-dark">
-                <tr>
-                    <td>Description:</td>
-                    <td>{{one_recipe.description}}</td>
-                </tr>
-                <tr>
-                    <td>Under 30 Minutes?</td>
-                    {% if one_recipe.under_30_min == 1:%}
-                    <td>Yes</td>
-                    {% elif one_recipe.under_30_min == 0:%}
-                    <td>No</td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <td>Instructions:</td>
-                    <td>{{one_recipe.instructions}}</td>
-                </tr>
-                <tr>
-                    <td>Date Made:</td>
-                    <td>{{one_recipe.date_made.strftime('%B %d,%Y')}}</td>
-                </tr>
-            </table>
+            <div class="d-flex justify-content-between mt-2">
+                <h2 class="text-light">{{one_recipe.name}}</h2>
+                <h4 class="text-light me-5">Posted By:{{one_recipe.creator.first_name}}</h4>
+            </div>
+            <div class="border w-75">
+                <table class="table table-borderless text-warning w-75">
+                    <tr>
+                        <td>Description:</td>
+                        <td>{{one_recipe.description}}</td>
+                    </tr>
+                    <tr>
+                        <td>Under 30 Minutes?</td>
+                        {% if one_recipe.under_30_min == 1:%}
+                        <td>Yes</td>
+                        {% elif one_recipe.under_30_min == 0:%}
+                        <td>No</td>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <td>Instructions:</td>
+                        <td>{{one_recipe.instructions}}</td>
+                    </tr>
+                    <tr>
+                        <td>Date Made:</td>
+                        <td>{{one_recipe.date_made.strftime('%B %d,%Y')}}</td>
+                    </tr>
+                </table>
+            </div>
         </main>
     </div>
 </body>
