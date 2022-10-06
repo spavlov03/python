@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wall One</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="d-flex justify-content-between border-bottom border-dark">
+            <h1>CodingDojo Wall</h1>
+            <div class="d-flex">
+                <h2>Welcome {{user['first_name']}}</h2>
+                <a href="/logout" class="btn btn-success">Logout</a>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="left w-50">
+                <p>3 Message(s) for You</p>
+            </div>
+            <div class="right w-50">
+                <h3>Send Messages</h3>
+                <h4 class="text-success">You have sent 12 messages so far.</h4>
+                <form action="/send_message/" method="post">
+                    <label for="recepient">Recepient</label>
+                    <textarea name="recepient" cols="30" rows="3"></textarea>
+                    <input type="submit" value="Send">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

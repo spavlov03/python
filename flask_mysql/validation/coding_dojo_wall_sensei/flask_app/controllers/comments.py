@@ -4,6 +4,8 @@ from flask_app.models import comment
 
 @app.route('/post_comment/<post_id>',methods=["POST"])
 def wall_comment(post_id):
+    if "user_id" not in session:
+        return redirect("/logout")
     data = {
         "com_content": request.form['com_content'],
         "post_id": post_id,

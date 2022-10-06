@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container bg-dark">
+        <header class="d-flex justify-content-end text-light">
+            <div>
+                <a href="/recipes">back to recipes</a>
+                <a href="/logout" class="">Logout</a>
+            </div>
+        </header>
+        <main>
+            <h2 class="text-light">Add a New Recipe!</h2>
+            <h6 class="text-danger">Description must not be blank</h6>
+            <form action="/add_recipe" method="post" class="text-light d-flex flex-column">
+                <div class="d-flex gap-3">
+                    <div class="d-flex flex-column">
+                        <label for="name">Name</label>
+                        <input type="text" name="name">
+                        <label for="description">Description</label>
+                        <input type="text" name="description">
+                        <label for="instructions">Instructions</label>
+                        <input type="text" name="instructions">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <label for="date_made">Date Cooked/Made:</label>
+                        <input type="date" name="date_made">
+                        <label for="under_30_min">Under 30 Minutes?</label>
+                        <div class="d-flex gap-2">
+                            <input type="radio" name="under_30_min" value="1">
+                            <label for="yes">Yes</label>
+                            <input type="radio" name="under_30_min" value="0">
+                            <label for="no">No</label>
+                        </div>
+                    </div>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary">
+            </form>
+            <div class="d-flex justify-content-end">
+            </div>
+        </main>
+    </div>
+</body>
+</html>
