@@ -52,6 +52,8 @@ def edit_recipe(id):
 def recipe_edit(id):
     if "user_id" not in session:
         return redirect("/logout")
+    if not recipe.Recipe.validate_recipe(request.form):
+        return redirect(f"/recipes/edit/{id}")
     data = {
         "id":id,
         "name":request.form['name'],

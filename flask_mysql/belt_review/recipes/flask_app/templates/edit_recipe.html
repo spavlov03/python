@@ -53,6 +53,13 @@
                         </div>
                     </div>
                 </div>
+                {% with messages = get_flashed_messages(category_filter=['recipe']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-light">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+             {% endwith %}
                 <input type="submit" value="Submit" class="btn btn-primary submit-btn me-5 align-self-center new_btn">
             </form>
             <div class="d-flex justify-content-end">
