@@ -64,17 +64,17 @@ class User:
             flash("Email already taken.","register")
             is_valid = False
         if not EMAIL_REGEX.match(user['email']):
-            flash("Invalid email address!")
+            flash("Invalid email address!","register")
             is_valid = False
         if len(user['first_name']) < 2:
-            flash("First name must be at least 2 characters.")
+            flash("First name must be at least 2 characters.","register")
             is_valid = False
         if len(user['last_name']) < 2:
-            flash("Last name must be at least 2 characters.")
+            flash("Last name must be at least 2 characters.","register")
             is_valid = False
         if not PASS_REGEX.match(user['password']):
         #if len(user['password']) < 8:
-            flash("Password must be at least 8 characters and include One Uppercase, One lowercase and a number")
+            flash("Password must be at least 8 characters and include One Uppercase, One lowercase and a number","register")
             is_valid = False
         if user['password'] != user['password_confirm']:
             flash("Passwords don't match","register")
