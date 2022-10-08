@@ -17,7 +17,14 @@
             </div>
         </header>
         <main>
-            <form action="/new_ride" class="d-flex flex-column">
+            {% with messages = get_flashed_messages(category_filter=['ride']) %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="text-danger">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+             {% endwith %}
+            <form action="/new_ride" class="d-flex flex-column" method="post">
                 <table class="table table-borderless">
                     <tr>
                         <td><label for="destination">Destination:</label></td>
