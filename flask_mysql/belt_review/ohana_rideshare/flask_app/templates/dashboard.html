@@ -20,6 +20,7 @@
             <div class="left">
                 <h3 class="text-warning">Rideshare Requests</h3>
                 {% for ride in all_rides %}
+                {% if ride.driver_id == None: %}
                 <div class="d-flex flex-column mb-3">
                     <table class="border border-dark">
                         <tr>
@@ -37,17 +38,41 @@
                         {% if user["id"] == ride.creator['id']%}
                         <tr>
                             <td></td>
-                            <td><a href="">DELETE</a></td>
+                            <td><a href="/rides/delete/{{ride.id}}">DELETE</a></td>
+                        </tr>
+                        {% else: %}
+                        <tr>
+                            <td></td>
+                            <td><a href="/rides/{{ride.id}}/add_driver">I can drive!</a></td>
                         </tr>
                         {% endif %}
                     </table>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
             <div class="right">
                 <h3 class="text-warning">Booked Rideshares</h3>
-                <div class="border border-dark">
-                    <p>Toby is Driving Raquel to Longs Drugstore on Deb 13</p>
+                <div class="d-flex flex-column gap-2">
+                    {% for ride in all_rides_with_drivers %}
+                        {% if ride.driver_id == user['id'] %}
+                            <div class="border">
+                                <p>You are driving {{ride.first_name}} to {{ride.destination}} on {{ride.rideshare_date}}</p>
+                                <a href="/rides/{{ride.id}}">Details</a> | <a href="/rides/{{ride.id}}/remove_driver">Cancel</a>
+                            </div>
+                        {% else: %}
+                            {% if ride.user_id == user['id']: %}
+                            <div class="border">
+                                <p>{{ride['drivers.first_name']}} is driving you to {{ride.destination}} on {{ride.rideshare_date}}</p>
+                            </div>
+                            {% else: %}
+                            <div class="border">
+                                <p>{{ride['drivers.first_name']}} is driving {{ride.first_name}} to {{ride.destination}} on {{ride.rideshare_date}}</p>
+                            </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    <div></div>
                 </div>
             </div>
         </main>

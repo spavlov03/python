@@ -9,13 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <header class="d-flex justify-content-between mt-3 border-bottom border-dark">
-            <h2>Request a Ride</h2>
-            <div>
-                <a href="/rides/dashboard" class="btn btn-success">Home</a>
-                <a href="/logout" class="btn btn-danger">Logout</a>
-            </div>
-        </header>
+        
         <main>
             {% with messages = get_flashed_messages(category_filter=['ride']) %}
                 {% if messages %}

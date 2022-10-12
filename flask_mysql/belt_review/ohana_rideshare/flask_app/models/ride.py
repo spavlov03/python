@@ -20,15 +20,15 @@ class Ride:
     @classmethod
     def request_ride(cls,data):
         query = "INSERT INTO rides (destination,pick_up_location,rideshare_date,details,user_id) VALUES (%(destination)s,%(pick_up_location)s,%(rideshare_date)s,%(details)s,%(user_id)s);"
-        print("DATA BEFORE QUERY IS ----",data)
+        #print("DATA BEFORE QUERY IS ----",data)
         result = connectToMySQL(cls.DB).query_db(query,data)
-        print("ADDING A NEW RIDE----",result)
+        #print("ADDING A NEW RIDE----",result)
         return result
     @classmethod
     def get_all_rides(cls):
         query = "SELECT * FROM rides JOIN users on rides.user_id = users.id;"
         results = connectToMySQL(cls.DB).query_db(query)
-        print("RESULTS ARE_-----",results)
+        #print("RESULTS ARE_-----",results)
         rides = []
         for row in results:
             ride = cls(row)
@@ -45,6 +45,50 @@ class Ride:
             ride.creator = creator
             rides.append(ride)
         return rides
+
+    @classmethod
+    def get_all_rides_with_drivers(cls):
+        query = "SELECT * FROM rides JOIN users ON rides.user_id = users.id JOIN users AS drivers ON rides.driver_id = drivers.id;"
+        results = connectToMySQL(cls.DB).query_db(query)
+        print("RESULTS ARE_-----",results)
+        rides = []
+        for row in results:
+            rides.append(row)
+        print("RIDES ARE ----",rides)
+        return rides
+    @classmethod
+    def get_one_ride_with_drivers(cls,data):
+        query = "SELECT * FROM rides JOIN users ON rides.user_id = users.id JOIN users AS drivers ON rides.driver_id = drivers.id WHERE rides.id=%(id)s;"
+        results = connectToMySQL(cls.DB).query_db(query,data)
+        print("RESULTS ARE_-----",results)
+        return results[0]
+
+    @classmethod
+    def get_ride_by_id(cls,data):
+        query = "SELECT * FROM rides WHERE id=%(id)s;"
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        #print("GET RIDE BY ID RESULT----",result)
+        return result [0]
+
+    @classmethod
+    def delete_ride(cls,data):
+        query = "DELETE FROM rides WHERE id=%(id)s;"
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        #print("DELETING RIDE RESULT---",result)
+        return result
+    @classmethod
+    def driver_add(cls,data): 
+        query = "UPDATE rides SET driver_id = %(driver_id)s WHERE id=%(id)s;"
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        #print("ADDING DRIVER to RIDE",result)
+        return result
+    @classmethod
+    def driver_remove(cls,id): 
+        data = {"id": id}
+        query = "UPDATE rides SET driver_id = NULL WHERE id=%(id)s;"
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        return result
+
     @staticmethod
     def validate_ride(ride):
         is_valid = True

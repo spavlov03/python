@@ -8,8 +8,9 @@ def dashboard():
         return redirect("/logout")
     data = {"id": session['user_id']}
     all_rides = ride.Ride.get_all_rides()
-    print("ALL RIDES ARE -----",all_rides)
-    return render_template('dashboard.html',user = user.User.get_user_by_id(data),all_rides=all_rides)
+    all_rides_with_drivers = ride.Ride.get_all_rides_with_drivers()
+    #print("ALL RIDES ARE -----",all_rides)
+    return render_template('dashboard.html',user = user.User.get_user_by_id(data),all_rides=all_rides,all_rides_with_drivers=all_rides_with_drivers)
 
 @app.route("/rides/new")
 def add_ride():
@@ -29,6 +30,40 @@ def new_ride():
         "details": request.form['details'],
         "user_id": session['user_id']
     }
-    print("DATA IN CONTROLLER IS ----",data)
+    #print("DATA IN CONTROLLER IS ----",data)
     ride.Ride.request_ride(data)
     return redirect('/rides/dashboard')
+@app.route("/rides/delete/<int:id>")
+def delete_ride(id): 
+    if "user_id" not in session:
+        return redirect("/logout")
+    data = {"id":id}
+    one_ride = ride.Ride.get_ride_by_id(data)
+    #print(one_ride)
+    if session['user_id'] == one_ride['user_id']:
+        ride.Ride.delete_ride(data)
+    return redirect('/rides/dashboard')
+@app.route("/rides/<int:id>/add_driver")
+def add_driver(id):
+    if "user_id" not in session:
+        return redirect("/logout")
+    driver_data = {
+        "id":id,
+        "driver_id": session["user_id"]
+        }
+    ride.Ride.driver_add(driver_data)
+    return redirect('/rides/dashboard')
+@app.route("/rides/<int:id>/remove_driver")
+def remove_driver(id):
+    if "user_id" not in session:
+        return redirect("/logout")
+    ride.Ride.driver_remove(id)
+    return redirect('/rides/dashboard')
+@app.route("/rides/<int:id>")
+def show_ride(id):
+    if "user_id" not in session:
+        return redirect("/logout")
+    data = {"id":id}
+    this_ride = ride.Ride.get_one_ride_with_drivers(data)
+    user_in_session = session['user_id']
+    return render_template("show_ride.html",this_ride = this_ride,user_in_session=user_in_session)
