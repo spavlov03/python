@@ -48,7 +48,7 @@
                     <td>{{this_ride.details}}</td>
                 </tr>
                 <tr>
-                    <td><a href="">Edit</a> | 
+                    <td><a href="/rides/edit/{{this_ride.id}}">Edit</a> | 
                         {% if user_in_session == this_ride.user_id: %}
                         <a href="/rides/delete/{{this_ride.id}}">DELETE</a>
                         {% elif user_in_session == this_ride.driver_id: %}
@@ -58,6 +58,20 @@
                     <td></td>
                 </tr>
             </table>
+            <div class="border-top border-dark mt-3">
+                <h2 class="text-warning mt-3">Ride messages:</h2>
+                <div></div>
+                <form action="/send_message/{{this_ride.id}}" class="d-flex flex-column" method="post">
+                    
+                    <input type="hidden" name="driver_id" value="{{user_in_session}}">{{this_ride.driver_id}}
+                    <input type="hidden" name="user_id" value="{{this_ride.user_id}}">{{this_ride.user_id}}
+                    <input type="text" name="content">
+                    <input type="submit" value="Send Message" class="btn btn-warning w-25 mt-3">
+                </form>
+            </div>
+            {% for message in ride_messages: %}
+            <p class="text-danger">{{message.sender_id}}: {{message.content}}</p>
+            {% endfor %}
         </main>
     </div>
 </body>

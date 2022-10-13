@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <header class="d-flex justify-content-between mt-3 border-bottom border-dark">
-            <h2>Ohana Rideshares</h2>
+            <h2>Update the Details!</h2>
             <div>
                 <a href="/rides/dashboard" class="btn btn-success">Home</a>
                 <a href="/logout" class="btn btn-danger">Logout</a>
@@ -24,27 +24,22 @@
                     {% endfor %}
                 {% endif %}
              {% endwith %}
-            <form action="/new_ride" class="d-flex flex-column" method="post">
+            <form action="/edit_ride/{{one_ride.id}}" class="d-flex flex-column" method="post">
                 <table class="table table-borderless">
                     <tr>
-                        <td><label for="destination">Destination:</label></td>
-                        <td><input type="text" name="destination"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="pick_up_location">Pick-up Location:</label></td>
-                        <td><input type="text" name="pick_up_location"></td>
-                    </tr>
-                    <tr>
-                        <td><label for="rideshare_date">Rideshare Date</label></td>
-                        <td><input type="date" name="rideshare_date"></td>
+                        <td>
+                            <input type="hidden" name="destination" value="{{one_ride.destination}}">
+                            <input type="hidden" name="rideshare_date" value="{{one_ride.rideshare_date}}">
+                            <label for="pick_up_location">Pick-up Location:</label></td>
+                        <td><input type="text" name="pick_up_location" value="{{one_ride.pick_up_location}}"></td>
                     </tr>
                     <tr>
                         <td><label for="details">Details:</label></td>
-                        <td><textarea name="details" cols="18" rows="3"></textarea></td>
+                        <td><textarea name="details" cols="18" rows="3">{{one_ride.details}}</textarea></td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><input type="submit" value="Post" class="btn btn-primary"></td>
+                        <td><input type="submit" value="Update" class="btn btn-primary"></td>
                     </tr>
                 </table>
             </form>

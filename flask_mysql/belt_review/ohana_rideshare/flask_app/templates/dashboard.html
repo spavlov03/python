@@ -64,6 +64,7 @@
                             {% if ride.user_id == user['id']: %}
                             <div class="border">
                                 <p>{{ride['drivers.first_name']}} is driving you to {{ride.destination}} on {{ride.rideshare_date}}</p>
+                                <a href="/rides/{{ride.id}}">Details</a>
                             </div>
                             {% else: %}
                             <div class="border">

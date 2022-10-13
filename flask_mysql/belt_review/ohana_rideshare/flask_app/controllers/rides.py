@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request,session,flash
 from flask_app import app
-from flask_app.models import ride,user
+from flask_app.models import ride,user,message
 
 @app.route("/rides/dashboard")
 def dashboard():
@@ -64,6 +64,28 @@ def show_ride(id):
     if "user_id" not in session:
         return redirect("/logout")
     data = {"id":id}
+    msg_data = {"ride_id":id}
     this_ride = ride.Ride.get_one_ride_with_drivers(data)
     user_in_session = session['user_id']
-    return render_template("show_ride.html",this_ride = this_ride,user_in_session=user_in_session)
+    ride_messages = message.Message.get_all_messages_for_ride(msg_data)
+    return render_template("show_ride.html",this_ride = this_ride,user_in_session=user_in_session,ride_messages=ride_messages)
+@app.route("/rides/edit/<int:id>")
+def edit_ride(id): 
+    if "user_id" not in session:
+        return redirect("/logout")
+    data = {"id":id}
+    one_ride = ride.Ride.get_ride_by_id(data)
+    return render_template("edit_ride.html",one_ride = one_ride)
+@app.route("/edit_ride/<int:id>",methods=["POST"])
+def ride_edit(id):
+    if "user_id" not in session:
+        return redirect("/logout")
+    data = {
+        "id":id,
+        "pick_up_location": request.form['pick_up_location'],
+        "details": request.form['details']
+    }
+    if not ride.Ride.validate_ride(request.form):
+        return redirect(f"/rides/edit/{id}")
+    ride.Ride.edit_ride_by_id(data)
+    return redirect(f"/rides/{id}")

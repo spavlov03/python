@@ -1,3 +1,4 @@
+from time import strptime
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_app.models import ride,user
@@ -50,17 +51,17 @@ class Ride:
     def get_all_rides_with_drivers(cls):
         query = "SELECT * FROM rides JOIN users ON rides.user_id = users.id JOIN users AS drivers ON rides.driver_id = drivers.id;"
         results = connectToMySQL(cls.DB).query_db(query)
-        print("RESULTS ARE_-----",results)
+        #print("RESULTS ARE_-----",results)
         rides = []
         for row in results:
             rides.append(row)
-        print("RIDES ARE ----",rides)
+        #print("RIDES ARE ----",rides)
         return rides
     @classmethod
     def get_one_ride_with_drivers(cls,data):
         query = "SELECT * FROM rides JOIN users ON rides.user_id = users.id JOIN users AS drivers ON rides.driver_id = drivers.id WHERE rides.id=%(id)s;"
         results = connectToMySQL(cls.DB).query_db(query,data)
-        print("RESULTS ARE_-----",results)
+        #print("RESULTS ARE_-----",results)
         return results[0]
 
     @classmethod
@@ -88,6 +89,12 @@ class Ride:
         query = "UPDATE rides SET driver_id = NULL WHERE id=%(id)s;"
         result = connectToMySQL(cls.DB).query_db(query,data)
         return result
+    @classmethod
+    def edit_ride_by_id(cls,data):
+        query = "UPDATE rides SET pick_up_location = %(pick_up_location)s, details = %(details)s WHERE id = %(id)s;"
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        print("EDIT RIDE QUERY ----",result)
+        return result
 
     @staticmethod
     def validate_ride(ride):
@@ -99,6 +106,9 @@ class Ride:
             flash("Pick up location must be at least 3 characters.","ride")
             is_valid = False
         if len(ride['details']) < 10:
-            flash("Details must be at least 3 characters.","ride")
+            flash("Details must be at least 10 characters.","ride")
+            is_valid = False
+        if len(ride['rideshare_date']) < 3:
+            flash("Rideshare date must be YYYY-MM-DD format","ride")
             is_valid = False
         return is_valid
