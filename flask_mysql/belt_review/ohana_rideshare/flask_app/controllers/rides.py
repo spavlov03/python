@@ -1,6 +1,6 @@
 from flask import render_template, redirect, request,session,flash
 from flask_app import app
-from flask_app.models import ride,user,message
+from flask_app.models import ride,user
 
 @app.route("/rides/dashboard")
 def dashboard():
@@ -67,8 +67,7 @@ def show_ride(id):
     msg_data = {"ride_id":id}
     this_ride = ride.Ride.get_one_ride_with_drivers(data)
     user_in_session = session['user_id']
-    ride_messages = message.Message.get_all_messages_for_ride(msg_data)
-    return render_template("show_ride.html",this_ride = this_ride,user_in_session=user_in_session,ride_messages=ride_messages)
+    return render_template("show_ride.html",this_ride = this_ride,user_in_session=user_in_session)
 @app.route("/rides/edit/<int:id>")
 def edit_ride(id): 
     if "user_id" not in session:
@@ -89,3 +88,16 @@ def ride_edit(id):
         return redirect(f"/rides/edit/{id}")
     ride.Ride.edit_ride_by_id(data)
     return redirect(f"/rides/{id}")
+
+# @app.route("/send_message/<int:id>",methods=['POST','GET'])
+# def send_message(id):
+#     if "user_id" not in session:
+#         return redirect("/logout")
+#     data = {
+#         "content": request.form['content'],
+#         "ride_id": id,
+#         "sender_id": request.form['driver_id'],
+#         "receiver_id": request.form['user_id']
+#     }
+#     ride.Ride.send_message(data)
+#     return redirect(f"/rides/{id}")
