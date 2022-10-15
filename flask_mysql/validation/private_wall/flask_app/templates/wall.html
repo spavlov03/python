@@ -12,22 +12,31 @@
         <div class="d-flex justify-content-between border-bottom border-dark">
             <h1>CodingDojo Wall</h1>
             <div class="d-flex">
-                <h2>Welcome {{user['first_name']}}</h2>
+                <h2>Welcome, {{user_in_session.first_name}}</h2>
                 <a href="/logout" class="btn btn-success">Logout</a>
             </div>
         </div>
         <div class="d-flex">
             <div class="left w-50">
-                <p>3 Message(s) for You</p>
+                <p>{{users_messages|length}} Message(s) for You</p>
+                {% for message in users_messages: %}
+                <p>{{message.creator.first_name}} said to you {{today - message.created_at}} hours ago.</p>
+                <p class="ms-5">{{message.content}} <a href="/delete/{{message.id}}">DELETE</a></p>
+                {% endfor %}
             </div>
             <div class="right w-50">
                 <h3>Send Messages</h3>
-                <h4 class="text-success">You have sent 12 messages so far.</h4>
-                <form action="/send_message/" method="post">
-                    <label for="recepient">Recepient</label>
-                    <textarea name="recepient" cols="30" rows="3"></textarea>
-                    <input type="submit" value="Send">
-                </form>
+                <h4 class="text-success">You have sent {{messages_by_user|length}} messages so far.</h4>
+                {% for user in all_users: %}
+                    {% if session['user_id'] != user.id: %}
+                    <form action="/send_message/{{user.id}}" method="post">
+                        <label for="recepient">{{user.first_name}}</label>
+                        <input type="hidden" name="sender_id" value="{{session['user_id']}}">
+                        <textarea name="content" cols="30" rows="3"></textarea>
+                        <input type="submit" value="Send">
+                    </form>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>

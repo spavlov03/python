@@ -1,6 +1,8 @@
-from flask import render_template, redirect, request,session
+from flask import render_template, redirect, request,session,flash
 from flask_app import app
 from flask_app.models import user
+from flask_bcrypt import Bcrypt
+bcrypt = Bcrypt(app)
 
 
 @app.route("/")
@@ -10,19 +12,33 @@ def index():
     return render_template('index.html')
 @app.route("/register",methods=["POST"])
 def register(): 
-    if not user.User.validate_register(request.form):
+    if not user.User.validate_user(request.form):
         return redirect("/")
-    user_id = user.User.register(request.form)
+    print("register pass----",request.form['password'])
+    data = {
+            "first_name":request.form['first_name'],
+            "last_name":request.form['last_name'],
+            "email":request.form['email'],
+            "password":bcrypt.generate_password_hash(request.form['password'])
+        }
+    user_id = user.User.register(data)
     session['user_id'] = user_id
+
     return redirect("/wall")
 
 @app.route('/login',methods=["POST"])
 def login():
-    logged_in_user = user.User.validate_login(request.form)
-    if not logged_in_user:
+    users = user.User.get_user_info_by_email(request.form)
+    print("USERS ARE",users)
+    if not users:
+        flash("Invalid Email/Password","login")
         return redirect('/')
-    session['user_id'] = logged_in_user.id
+    if not bcrypt.check_password_hash(users.password, request.form['password']):
+        flash("Invalid Email/Password","login")
+        return redirect('/')
+    session['user_id'] = users.id
     return redirect("/wall")
+
 @app.route('/logout')
 def logout():
     session.clear()
