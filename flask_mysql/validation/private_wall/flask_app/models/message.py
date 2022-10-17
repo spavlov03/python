@@ -20,7 +20,7 @@ class Message:
         INSERT INTO messages (content,sender_id,receiver_id) VALUES (%(content)s,%(sender_id)s,%(receiver_id)s);
         """
         result = connectToMySQL(cls.DB).query_db(query,message_data)
-        print("SENDING NEW MESSAGE___",result)
+        #print("SENDING NEW MESSAGE___",result)
         # user.User.messages = result
         # print("USERS msgs",user.User.messages)
         return result
@@ -56,7 +56,7 @@ class Message:
         SELECT * FROM messages WHERE sender_id = %(sender_id)s;
         """
         result = connectToMySQL(cls.DB).query_db(query,user_id)
-        print("")
+        #print("")
         
         return result
 
