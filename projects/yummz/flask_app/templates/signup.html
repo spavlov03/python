@@ -19,8 +19,8 @@
       <a href="/login" class="btn btn-outline-primary">Login</a>
       <a href="/signup" class="btn btn-outline-info">Sign Up</a>
     </header>
-    <main class="mx-auto">
-      <form method="post" class="d-flex flex-column gap-2 mt-5 mx-auto">
+    <main class="mx-auto d-flex justify-content-center">
+      <form action="/register" method="post" class="d-flex flex-column gap-2 mt-5 w-75">
         <div class="d-flex row">
           <label for="first_name" class="col-lg-2 col-sm-3 col-xs-3">First Name: </label>
           <input type="text" name="first_name" class="border border-dark col-lg-3 col-sm-3 col-xs-3">
@@ -43,6 +43,15 @@
         </div>
         <input type="submit" value="Sign Up" class="btn btn-success">
       </form>
+      <div class="messages d-flex flex-column w-25">
+      {% with messages = get_flashed_messages(category_filter=['register']) %}
+        {% if messages %}
+          {% for message in messages %}
+            <p class="text-dark">{{message}}</p>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+      </div>
     </main>    
     
   </div>

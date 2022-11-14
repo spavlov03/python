@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yummz</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+</head>
+<body>
+  <div class="container">
+    <header class="d-flex navbar">
+      <!-- <a href="/"><img src="{{url_for('static',filename='images/logo.png')}}" id="logo"></a> -->
+      
+      
+      <nav class="navbar navbar-expand-lg ">
+        <div class="container-fluid">
+          <a href="/dashboard"><img src="{{url_for('static',filename='images/logo.png')}}" id="logo" class=""></a>
+          <div class="ms-2 me-2">
+            <h5>Welcome to YummZ to {{logged_user.first_name}}</h5>
+            <h6>The best place to find delicious recipes!</h6>
+          </div>
+          <!-- <a class="" href="#">Navbar</a> -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/dashboard">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Dropdown
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <a href="/logout" class="btn btn-outline-danger ms-2">Logout</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="">
+      <form action="/add_recipe" method="post" class="d-flex flex-column w-50">
+        <label for="recipe_name">Recipe Name:</label>
+        <input type="text" name="recipe_name">
+        <label for="duration">How Long To Cook in Minutes:</label>
+        <input type="number" name="duration">
+        <label for="">Ingredients</label>
+        <div>
+          <label for="ingredients">Ing1</label>
+          <input type="checkbox" name="ingredients" id="">
+        </div>
+        <div>
+          <label for="ingredients">Ing2</label>
+          <input type="checkbox" name="ingredients" id="">
+        </div>
+        <label for="instructions">Instructions:</label>
+        <input type="text" name="instructions">
+        <input type="submit" value="Add" class="btn btn-info w-50 mt-2">
+      </form>
+      
+      </div>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+</html>
