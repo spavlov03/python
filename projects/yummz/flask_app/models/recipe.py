@@ -19,9 +19,13 @@ class Recipe:
     return result
 
   @classmethod
-  def add_recipe(cls,data,data2): 
+  def add_recipe(cls,data): 
     query = "INSERT INTO recipes (recipe_name,duration,instructions,user_id) VALUES (%(recipe_name)s,%(duration)s,%(instructions)s,%(user_id)s);"
     result = connectToMySQL(cls.DB).query_db(query,data)
-    query2 = "INSERT INTO recipes_has_ingredients (recipe_id,ingredient_id,ingredient_qty) VALUES (%(recipe_id)s,%(ingredient_id)s,%(ingredient_qty)s)"
-    result2 = connectToMySQL(cls.DB).query_db(query,data2)
-    return result and result2
+    return result 
+
+  @classmethod
+  def get_recipe_by_name(cls,data):
+    query = "SELECT * FROM recipes WHERE recipe_name=%(recipe_name)s"
+    result = connectToMySQL(cls.DB).query_db(query,data)
+    return result

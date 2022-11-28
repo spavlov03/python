@@ -52,9 +52,8 @@ def register():
 def dashboard():
   data = {"id":session['user_id']}
   logged_user = user.User.get_user_by_id(data)
-  ingredients = ingredient.Ingredient.get_all_ingredients()
   recipes = recipe.Recipe.get_all_recipes()
-  return render_template('dashboard.html',logged_user=logged_user,ingredients=ingredients, recipes=recipes)
+  return render_template('dashboard.html',logged_user=logged_user, recipes=recipes)
 
 
 @app.route("/logout")
