@@ -2,7 +2,13 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.http import JsonResponse
 # Create your views here.
 def root(request): 
-    return redirect('/blogs')
+    context = { 
+        'name' : 'Svet', 
+        'car_brands' : 'Mercedes', 
+        'car_models': ['560 SEC','GL450']
+
+    }
+    return render(request,'index.html',context)
 def index(request): 
     return HttpResponse("placeholder to later dispaly a list of all blogs")
 def create(request):
