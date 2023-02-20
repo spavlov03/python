@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from time import gmtime,strftime
 from datetime import datetime
 import pytz
@@ -10,3 +10,11 @@ def index(request):
         'date': datetime.now().strftime('%b %d, %Y')
     }
     return render(request,'index.html',context)
+def form(request): 
+    if request.method == "POST":
+        val_from_field_one = request.POST["one"]
+        val_from_field_two = request.POST["two"]
+    return render(request,'form.html')
+def form_result(request): 
+    print(request)
+    return redirect("/")

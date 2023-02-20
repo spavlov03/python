@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'time_display',
+    'second_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
