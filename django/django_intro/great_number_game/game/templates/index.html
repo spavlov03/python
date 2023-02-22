@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Great Number Game</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">   
+</head>
+<body class="d-flex flex-column p-5">
+  <h3 class="mx-auto">Welcome To The Great Number Game!</h3>
+  <p class="mx-auto">I am thinking of a number between 1 and 100</p>
+  <p class="mx-auto">Take a guess!</p>
+  {% if request.session.status == null %}
+    <div>
+      <!-- <p>No Guess</p> -->
+    </div>
+  {% else %}
+    {% if request.session.status == "too low" %}
+      <div class="bg-danger box mx-auto">
+        <p class="mx-auto">Too Low!</p>
+      </div>
+      {% elif request.session.status == "too high" %}
+      <div class="bg-danger box mx-auto">
+        <p class="mx-auto">Too High!</p>
+      </div>
+      {% elif request.session.status == "you loose" %}
+      <div class="bg-danger box mx-auto d-flex flex-column">
+        <p class="mx-auto">You Loose!</p>
+        <a href="/reset" class="btn btn-info mx-auto">Play again!</a>
+      </div>
+      {% else %}
+      <div class="bg-success box mx-auto d-flex flex-column">
+        <p class="mx-auto mt-5 text">Correct! {{request.session.number}} was the number!</p>
+        <a href="/reset" class="btn btn-info mx-auto">Play again!</a>
+      </div>
+    {% endif %}
+  {% endif %}
+  <form action="/check" method="post" class="d-flex flex-column mx-auto gap-3">
+    {% csrf_token %}
+    <input type="number" name="number">
+    <input type="submit" value="Submit">
+  </form>
+  <p class="text">Attempts Made: {{request.session.counter}}</p>
+</body>
+</html>
