@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 def index(request): 
-    
+    if 'visits' in request.session: 
+        request.session['visits'] +=1
+    else:
+        request.session['visits'] = 0
     if 'counter' in request.session: 
         print('key exists!')
         request.session['counter'] += 1

@@ -10,3 +10,15 @@ Run Project :
 Create new app : 
     python3 manage.py startapp your_app_name_here
 
+Add each app to settings.py in Project
+add urls pat to main urls.py - path('',include("app.urls"))
+Add urls.py to app folder 
+    from django.urls import path
+    from . import views
+    urlpatterns = [
+        path('',views.index)
+    ]
+
+
+Migrations - session: 
+    python3 manage.py migrate
