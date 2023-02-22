@@ -10,6 +10,12 @@
 <body>
   <h2>Counter</h2>
   <h6>{{request.session.counter}}  times</h6>
+  <form action="/custom" method="post">
+    {% csrf_token %}
+    <label for="name">How Much to add?</label>
+    <input type="text" name="qty">
+    <input type="submit" value="Add">
+  </form>
   <a href="/destroy_session" class="btn btn-danger">Clear</a>
   <a href="/double" class="btn btn-info">+2</a>
 </body>

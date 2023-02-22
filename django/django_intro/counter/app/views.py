@@ -16,3 +16,8 @@ def clear_ses(request):
 def double(request): 
     request.session['counter'] += 1
     return redirect('/')
+def custom(request):
+    qty = int(request.POST['qty'])
+    
+    request.session['counter'] = request.session['counter'] + qty-1
+    return redirect('/')
