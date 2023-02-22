@@ -6,6 +6,8 @@ def index(request):
 def create_user(request): 
     print('Got Post Info.....',request.POST)
     name = request.POST['name']
+    request.session['name'] = name
+    request.session['counter'] = 100
     location = request.POST['location']
     language = request.POST['language']
     comment = request.POST['comment']
