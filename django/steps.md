@@ -21,4 +21,6 @@ Add urls.py to app folder
 
 
 Migrations - session: 
+    python3 manage.py makemigrations
+    
     python3 manage.py migrate
