@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, HttpResponse
-from django.http import JsonResponse
+from .models import Blog
 # Create your views here.
 def index(request): 
-    return HttpResponse("placeholder to later dispaly a list of all blogs")
+    context = {'blogs':Blog.objects.all()}
+    return render(request,'index.html',context)
 def new(request): 
     return HttpResponse("placeholder to display a new form to create a new blog")
 def create(request):

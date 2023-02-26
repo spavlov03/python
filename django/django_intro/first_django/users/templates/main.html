@@ -10,7 +10,14 @@
   <h2>Main Page</h2>
   <ul>
     {% for user in all_users %}
-    <li>{{user.first_name}} {{user.last_name}}</li>
+    <li>{{user.first_name}} {{user.last_name}}
+    <ul>
+      {% for blog in user.blogs.all %}
+      <li><em>{{blog.name}}</em></li>
+      {% endfor %}
+      
+    </ul>
+  </li>
     {% endfor %}
   </ul>
 </body>
