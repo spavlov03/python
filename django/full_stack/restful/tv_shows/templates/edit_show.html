@@ -32,6 +32,13 @@
       <textarea name="description" id="" cols="30" rows="3">{{show.description}}</textarea>
       <input type="submit" value="Update" class="btn btn-info w-25 mx-auto">
     </form>
+    {% if messages %}
+    <ul class="text-danger">
+      {% for message in messages %}
+      <li> {{message}} </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
     <a href="/shows/{{show.id}}" class="">Go to Show</a>
 </div>
 </body>
