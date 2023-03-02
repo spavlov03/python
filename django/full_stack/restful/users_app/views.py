@@ -22,7 +22,7 @@ def register(request):
     return redirect('/shows',context)
 def login(request): 
     user = User.objects.filter(email=request.POST['email'])
-    if user:
+    if user: 
         logged_user = user[0]
         if bcrypt.checkpw(request.POST['password'].encode(),logged_user.password.encode()):
             request.session['userid'] = logged_user.id
