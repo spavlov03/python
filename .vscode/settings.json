@@ -1,4 +1,6 @@
 {
     "workbench.colorTheme": "Default Dark+",
-    "editor.acceptSuggestionOnEnter": "on"
+    "editor.acceptSuggestionOnEnter": "on",
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": []
 }

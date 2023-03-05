@@ -20,11 +20,26 @@ def register(request):
         request.session['logged_user_id'] = logged_user.id
         return redirect('/success')
 def login(request):
-    return redirect('/success')
+    print("Before User")
+    user = User.objects.filter(email=request.POST['email'])
+    print("After User",user)
+    if user: 
+        logged_user = user[0]
+        if bcrypt.checkpw(request.POST['password'].encode(),logged_user.password.encode()):
+            request.session['logged_user_id'] = logged_user.id
+            print("Pass is good!")
+            return redirect('/success')
+    else:
+        print("No User")
+        messages.warning(request,"Invalid Email/Password")
+        return redirect('/')
 def success(request):
-    context = {
-        'logged_user' : User.objects.get(id=request.session['logged_user_id'])
-    }
-    return render(request,'home.html',context)
+        context = {
+            'logged_user' : User.objects.get(id=request.session['logged_user_id'])
+        }
+        return render(request,'home.html',context)
 def logout(request):
-    pass
+    try :
+        del request.session['logged_user_id']
+    except KeyError:
+        return redirect('/')
