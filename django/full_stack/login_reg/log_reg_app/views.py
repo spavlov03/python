@@ -34,12 +34,16 @@ def login(request):
         messages.warning(request,"Invalid Email/Password")
         return redirect('/')
 def success(request):
-        context = {
-            'logged_user' : User.objects.get(id=request.session['logged_user_id'])
-        }
-        return render(request,'home.html',context)
+        if request.session['logged_user_id'] == None:
+            pass
+        else:
+            context = {
+                'logged_user' : User.objects.get(id=request.session['logged_user_id'])
+            }
+            return render(request,'home.html',context)
 def logout(request):
     try :
         del request.session['logged_user_id']
+        return redirect('/')
     except KeyError:
         return redirect('/')
