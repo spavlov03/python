@@ -29,13 +29,13 @@ def login(request):
             request.session['logged_user_id'] = logged_user.id
             print("Pass is good!")
             return redirect('/success')
-    else:
+    else: 
         print("No User")
         messages.warning(request,"Invalid Email/Password")
         return redirect('/')
 def success(request):
         if request.session['logged_user_id'] == None:
-            pass
+            return redirect('/')
         else:
             context = {
                 'logged_user' : User.objects.get(id=request.session['logged_user_id'])
