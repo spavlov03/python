@@ -1,5 +1,8 @@
 from django.db import models
 import re
+import datetime
+from datetime import timedelta
+
 
 # Create your models here.
 class UserManager(models.Manager):
@@ -11,8 +14,13 @@ class UserManager(models.Manager):
             errors['first_name'] = "First name should be at least 2 characters"
         if len(postData['last_name']) < 2:
             errors['last_name'] = "Last name should be at least 2 characters"
+        if postData['bday'] > str(datetime.date.today() - timedelta(4745)):
+            print("Too Young!")
         if not EMAIL_REGEX.match(postData['email']):
             errors['email'] = 'Invalid email address'
+        if User.objects.filter(email=postData['email']):
+            print("Email Taken")
+            errors['email'] = "Email already taken"
         if postData['password'] != postData['password_conf']: 
             errors['password'] = 'Passwords must match'
         if len(postData['password']) < 8:
